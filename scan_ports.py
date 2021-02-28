@@ -15,7 +15,7 @@ class Scanner:
         return re.findall('(?:href=")(.*?)"', response.content)
 
     def crawl(self, url=None):
-        # find all possible links after /
+
         if url == None:
             url = self.target_url
         href_links = self.extract_links_from(url)
@@ -23,7 +23,7 @@ class Scanner:
             link = urlparse.urljoin(url, link)
             if "#" in link:
                 link = link.split("#")[0]
-            # make sure to change the http or https for the below argument to work
+           
             if self.target_url in link and link not in self.target_links and link not in self.links_to_ignore:
                 self.target_links.append(link)
                 print(link)
@@ -73,7 +73,7 @@ class Scanner:
                 print("Testing POST SQL injection attack concerning bypass login in " + link)
                 is_vulnerable_to_SQL = self.test_sql_injection_with_OR(form, link)
                 if is_vulnerable_to_SQL:
-                    # better idea is to see if the return HTML code is 100 or 200
+                    
                     print("\n\n[+] discovered login bypass SQL in " + link)
                     print(form)
 
